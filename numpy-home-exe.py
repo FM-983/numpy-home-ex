@@ -3,40 +3,49 @@ np.random.seed(42)
 
 if __name__ == '__main__':
     ###
-    # Exercise 1:
+    print("Exercise 1:\n")
+    ###
 
     np_random_array = np.random.randint(10, 99, (4, 3))
     print(np_random_array)
-
-    print(f"Sum of all elements: {np_random_array.sum()}")
-    print(f"Sum of each row : {np_random_array.sum(axis=1)}")
-    print(f"Sum of each column : {np_random_array.sum(axis=0)}")
+    sum_array = np_random_array.sum()
+    print(f"Sum of all elements: {sum_array}\n")
+    row_sum = np_random_array.sum(axis=1)
+    print(f"Sum of each row : {row_sum}\n")
+    column_sum = np_random_array.sum(axis=0)
+    print(f"Sum of each column : {column_sum}")
 
     ###
-    # Exercise 2:
+    print("\nExercise 2:\n")
+    ###
+
     random_array = np.random.randint(0, 11, 10)
     print(random_array)
     even = random_array % 2 == 0
     print(f"The amount of even numbers is {even.sum()}")
 
     ###
-    # Exercise 3:
+    print("\nExercise 3:\n")
+    ###
 
     np_array = np.arange(0, 100)
-    print(f"1'\n")
+    print(f"*'\n")
     print(np_array, "\n")
-    print(f"2'\n")
+    print(f"**'\n")
     reshape_array = np_array.reshape(10, 10)
     print(reshape_array, "\n")
-    print(f"3'\n")
+    print(f"***'\n")
     reshape_array[reshape_array > 50] = -1
     print(reshape_array, "\n")
-    print(f"4'\n")
+    print(f"****'\n")
     print(f"Sum of all elements in the array : {reshape_array.sum()},\n")
-    print(f"5'\n")
+    print(f"*****'\n")
     print(f"Mean of all elements in the array : {reshape_array.mean()}")
+
     ###
-    # Exercise 4:
+    print("\nExercise 4:\n")
+    ###
+
     lin_array = np.linspace(0, 100, 10)
     print(f'First array : {lin_array}')
     new_lin_array = lin_array[(lin_array > 50) | (lin_array < 20)].copy()
@@ -46,6 +55,7 @@ if __name__ == '__main__':
     def array_dreshaped(new_lin_array):
         try:
             new_lin_array = new_lin_array.reshape(2, -1)
+            print(new_lin_array)
         except ValueError:
             print(f"not possible to reshape a array whit : {new_lin_array.size} elements ")
 
@@ -53,17 +63,27 @@ if __name__ == '__main__':
     array_dreshaped(new_lin_array)
 
     ###
-    # Exercise 5:
-    np_zeros = np.zeros((4,4),dtype= int)
+    print("\nExercise 5\n")
+    ###
+
+    np_zeros = np.zeros((4, 4), dtype=int)
     print(np_zeros)
 
 
     def change_values_random(matrix):
-        indexes = [(0, 0), (3, 3)]
-        matrix[1:3, 1] = np.random.randint(10, 101, size=(1,2))
-        matrix[1:3, 2] = np.random.randint(10, 101, size=(1,2))
-        for row, col in indexes:
-            np_zeros[row,col] = np.random.randint(10,101)
-        return np_zeros
+        rows, cols = matrix.shape
+        random_value = lambda: np.random.randint(10, 101)
 
-    change_values_random(np_zeros)
+        matrix[0, 0] = random_value()
+
+        matrix[rows - 1, cols - 1] = random_value()
+
+        center_x, center_y = rows // 2, cols // 2
+        matrix[center_x, center_y] = random_value()
+
+        return matrix
+
+    print(f"Solution example : \n {change_values_random(np_zeros)}")
+
+
+
